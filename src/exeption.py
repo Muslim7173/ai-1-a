@@ -1,0 +1,20 @@
+import sys
+from src.logger import logging
+
+
+def error_message_detail(error,error_detail:sys):
+    _,_,exc_tb=error_message_detail.exc_info()
+    file_name=exc_tb.tb_frame.f_code_filename
+    error_message="Error occured in the python scrupt name [{0}] line number [{1} error message [{2}]]".format(
+        file_name,exc_tb.tb_lineno,str(error)
+    )
+    return error_message
+
+class CustomException(Exception):
+    def __init__(self,erro_message,erro_detail:sys):
+        super().__init__(erro_message)
+        self.error_message=error_message_detail(erro_message,error_detail=erro_detail)
+
+    def __str__(self):
+        return self.error_message 
+    
